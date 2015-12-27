@@ -1,18 +1,56 @@
 <head>
-  <title>mytodos</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mytodos</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+<div class="container">
 
-  {{> hello}}
+    <div class="jumbotron">
+        <h1>My personal todos tasks manager</h1>
+    </div>
+
+    <div class="row marketing">
+        <div class="col-lg-4">{{> loginButtons}}</div>
+        <div class="col-lg-6 right">
+            {{> main}}
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2015 Said GUERRAB, Inc.</p>
+    </footer>
+
+</div> <!-- /container -->
+
+
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
+<!-- ------------------------------------  Templates ---------------------------------->
 
 <template name="main">
+    <h4>Tasks list ({{numberOfTasks}})</h4>
+    {{#if currentUser}}
+        <form id="new-todo-form">
+            <div class="form-group">
+                <input class="form-control" type="text" name="taskName" placeholder="Type the task name...">
+            </div>
 
+        </form>
+    {{/if}}
+    <ul>
+        {{#each tasks}}
+            <li class="{{#if checked}} checked  {{/if}}">
+                {{#if currentUser}}
+                    <input type="checkbox" checked={{checked}} class="toggle-checked"/>
+                    <span class="glyphicon glyphicon-remove delete-task"></span>
+                    {{name}}
+                {{/if}}
+
+
+            </li>
+        {{/each}}
+    </ul>
 </template>
